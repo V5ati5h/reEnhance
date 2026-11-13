@@ -1,0 +1,78 @@
+name: Public Release & Distribution
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version tag (e.g. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+      release_title:
+        description: 'Title for the release'
+        required: false
+        default: 'reEnhance Release'
+      release_notes:
+        description: 'Release notes / changelog'
+        required: false
+        default: 'New update with latest ad injection engine and extension.'
+  repository_dispatch:
+    types: [publish_release]
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Package and Publish Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out public repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare release directory
+        run: |
+          mkdir -p dist
+          # Copy extension if present in repo
+          if [ -d "extension" ] && compgen -G "extension/*.aix" > /dev/null; then
+            cp extension/*.aix dist/
+          fi
+          # Check if assets passed from repository_dispatch
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "Processing repository_dispatch payload..."
+            # Payload can contain release details
+          fi
+
+      - name: Generate Checksums
+        run: |
+          cd dist
+          if compgen -G "*.*" > /dev/null; then
+            sha256sum *.* > SHA256SUMS.txt
+          fi
+
+      - name: Publish to GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ github.event.inputs.version || github.ref_name || 'v1.0.0' }}"
+          TITLE="${{ github.event.inputs.release_title || 'reEnhance ' }}$TAG"
+          NOTES="${{ github.event.inputs.release_notes || 'Release assets for reEnhance Manager and Extension.' }}"
+
+          echo "Target tag: $TAG"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG exists. Updating release assets..."
+            if compgen -G "dist/*" > /dev/null; then
+              gh release upload "$TAG" dist/* --clobber
+            fi
+          else
+            echo "Creating release $TAG..."
+            if compgen -G "dist/*" > /dev/null; then
+              gh release create "$TAG" dist/* --title "$TITLE" --notes "$NOTES"
+            else
+              gh release create "$TAG" --title "$TITLE" --notes "$NOTES"
+            fi
+          fi

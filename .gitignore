@@ -1,0 +1,18 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Editor files
+.idea/
+*.iml
+*.vscode/
+
+# Keep SDK bundles, extensions, and release packages
+!sdk-bundles/**/*.dex
+!sdk-bundles/**/*.json
+!sdk-bundles/**/*.xml
+!extension/*.aix
+!releases/*.apk
+!releases/*.aix
