@@ -1,0 +1,9 @@
+{
+  "id": "levelplay",
+  "version": "8.6.0",
+  "dexFiles": ["levelplay-1.dex"],
+  "dexSha256": ["e7c7ee346166ebbcc283f261588eb6a3ae9f35e949f97eeb8bc6406f2bc6db28"],
+  "manifestFile": "levelplay-manifest.xml",
+  "totalDexBytes": 3915568,
+  "sourceArtifacts": ["mediationsdk-8.6.0.aar", "kotlin-stdlib-1.8.22.jar", "kotlin-stdlib-common-1.8.22.jar", "annotations-13.0.jar"]
+}

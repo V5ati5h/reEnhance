@@ -1,0 +1,9 @@
+{
+  "id": "wootric",
+  "version": "2.27.0",
+  "dexFiles": ["wootric-1.dex"],
+  "dexSha256": ["4e4272e09021fc9ae056105acf39c8dbcd16eda1d4558fb4b159614598c44609"],
+  "manifestFile": "wootric-manifest.xml",
+  "totalDexBytes": 2103480,
+  "sourceArtifacts": ["wootric-sdk-android-2.27.0.aar", "commons-codec-1.10.jar", "appcompat-1.0.0.aar", "constraintlayout-1.1.3.aar", "lifecycle-extensions-2.2.0.aar", "fragment-1.2.4.aar", "vectordrawable-animated-1.0.0.aar", "legacy-support-core-ui-1.0.0.aar", "legacy-support-core-utils-1.0.0.aar", "vectordrawable-1.0.0.aar", "viewpager-1.0.0.aar", "loader-1.0.0.aar", "activity-1.1.0.aar", "coordinatorlayout-1.0.0.aar", "drawerlayout-1.0.0.aar", "slidingpanelayout-1.0.0.aar", "customview-1.0.0.aar", "swiperefreshlayout-1.0.0.aar", "asynclayoutinflater-1.0.0.aar", "core-1.1.0.aar", "lifecycle-process-2.2.0.aar", "lifecycle-service-2.2.0.aar", "lifecycle-runtime-2.2.0.aar", "cursoradapter-1.0.0.aar", "versionedparcelable-1.1.0.aar", "collection-1.1.0.jar", "lifecycle-viewmodel-savedstate-2.2.0.aar", "lifecycle-viewmodel-2.2.0.aar", "lifecycle-livedata-2.2.0.aar", "lifecycle-livedata-core-2.2.0.aar", "savedstate-1.0.0.aar", "lifecycle-common-2.2.0.jar", "core-runtime-2.1.0.aar", "core-common-2.1.0.jar", "documentfile-1.0.0.aar", "localbroadcastmanager-1.0.0.aar", "print-1.0.0.aar", "interpolator-1.0.0.aar", "annotation-1.1.0.jar", "constraintlayout-solver-1.1.3.jar"]
+}

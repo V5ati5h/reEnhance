@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS"/>
+    <queries>
+                
+        <intent>
+                        
+            <action android:name="android.intent.action.MAIN"/>
+                    
+        </intent>
+            
+    </queries>
+    <application>
+        <provider android:authorities="com.v5ati5h.reenhance.sdkbuild.placeholder.startappinitprovider" android:exported="false" android:name="com.startapp.sdk.adsbase.StartAppInitProvider"/>
+        <activity android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" android:name="com.startapp.sdk.adsbase.consent.ConsentActivity" android:theme="@android:style/Theme.Translucent"/>
+        <activity android:name="com.startapp.sdk.ads.list3d.List3DActivity" android:theme="@android:style/Theme"/>
+        <activity android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" android:name="com.startapp.sdk.ads.interstitials.OverlayActivity" android:theme="@android:style/Theme.Translucent"/>
+        <service android:name="com.startapp.sdk.cachedservice.BackgroundService"/>
+        <service android:name="com.startapp.sdk.jobs.SchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="true" android:name="com.startapp.sdk.adsbase.remoteconfig.BootCompleteListener">
+                        
+            <intent-filter>
+                                
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                            
+            </intent-filter>
+                    
+        </receiver>
+    </application>
+</manifest>

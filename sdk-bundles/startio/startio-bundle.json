@@ -1,0 +1,9 @@
+{
+  "id": "startio",
+  "version": "5.1.0",
+  "dexFiles": ["startio-1.dex"],
+  "dexSha256": ["6cebdc754ab9702f14252ea1b050776bea3dc8887907c789de5c8e2266e32409"],
+  "manifestFile": "startio-manifest.xml",
+  "totalDexBytes": 4303080,
+  "sourceArtifacts": ["inapp-sdk-5.1.0.aar", "json-1.0.2.aar", "play-services-appset-16.1.0.aar", "play-services-base-18.5.0.aar", "play-services-tasks-18.2.0.aar", "play-services-basement-18.4.0.aar", "fragment-1.1.0.aar", "viewpager-1.0.0.aar", "loader-1.0.0.aar", "activity-1.0.0.aar", "customview-1.0.0.aar", "core-1.2.0.aar", "versionedparcelable-1.1.0.aar", "collection-1.1.0.jar", "lifecycle-runtime-2.1.0.aar", "lifecycle-viewmodel-2.1.0.aar", "savedstate-1.0.0.aar", "lifecycle-livedata-2.0.0.aar", "lifecycle-livedata-core-2.0.0.aar", "core-runtime-2.0.0.aar", "core-common-2.1.0.jar", "lifecycle-common-2.1.0.jar", "annotation-jvm-1.11.0.jar", "kotlin-stdlib-2.1.20.jar", "annotations-13.0.jar"]
+}

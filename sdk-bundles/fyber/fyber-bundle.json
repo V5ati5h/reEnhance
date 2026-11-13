@@ -1,0 +1,9 @@
+{
+  "id": "fyber",
+  "version": "8.3.5",
+  "dexFiles": ["fyber-1.dex"],
+  "dexSha256": ["bda441791dddc71dfc91b71965bf43a2af1b4dfa172338abd4674ded01c94d70"],
+  "manifestFile": "fyber-manifest.xml",
+  "totalDexBytes": 1549100,
+  "sourceArtifacts": ["marketplace-sdk-8.3.5.aar", "om-sdk-1.5.1.aar"]
+}

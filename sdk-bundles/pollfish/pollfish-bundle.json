@@ -1,0 +1,9 @@
+{
+  "id": "pollfish",
+  "version": "6.5.0",
+  "dexFiles": ["pollfish-1.dex"],
+  "dexSha256": ["56cb0e672c1ba41315fed09267e1668d1ce4af1c0d64f0de48f759f0be73586c"],
+  "manifestFile": "pollfish-manifest.xml",
+  "totalDexBytes": 3437588,
+  "sourceArtifacts": ["pollfish-googleplay-6.5.0.aar", "kotlin-stdlib-1.7.20.jar", "play-services-ads-identifier-18.0.1.aar", "kotlin-stdlib-common-1.7.20.jar", "annotations-13.0.jar", "play-services-basement-18.0.0.aar", "fragment-1.0.0.aar", "legacy-support-core-ui-1.0.0.aar", "legacy-support-core-utils-1.0.0.aar", "loader-1.0.0.aar", "viewpager-1.0.0.aar", "coordinatorlayout-1.0.0.aar", "drawerlayout-1.0.0.aar", "slidingpanelayout-1.0.0.aar", "customview-1.0.0.aar", "swiperefreshlayout-1.0.0.aar", "asynclayoutinflater-1.0.0.aar", "core-1.2.0.aar", "versionedparcelable-1.1.0.aar", "collection-1.0.0.jar", "lifecycle-runtime-2.0.0.aar", "lifecycle-viewmodel-2.0.0.aar", "lifecycle-livedata-2.0.0.aar", "lifecycle-livedata-core-2.0.0.aar", "lifecycle-common-2.0.0.jar", "core-runtime-2.0.0.aar", "core-common-2.0.0.jar", "interpolator-1.0.0.aar", "cursoradapter-1.0.0.aar", "documentfile-1.0.0.aar", "localbroadcastmanager-1.0.0.aar", "print-1.0.0.aar", "annotation-1.1.0.jar"]
+}
