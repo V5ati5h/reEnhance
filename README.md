@@ -109,6 +109,8 @@ In App Inventor, click **Build > Android App (.apk)** or **Android App Bundle (.
 ### 3. 🛠️ Tools Tab
 - **Manifest & XML Viewer / Editor**: Decode binary `AndroidManifest.xml` from any APK or AAB into formatted, readable XML on your device. Search lines, edit XML tags, copy to clipboard, export `.xml` files, or repackage modified AIX extensions.
 - **AIX DeepLink Customizer**: Injects custom website domains (`https://`), custom URL schemes (`myapp://`), path prefixes, and `autoVerify` flags directly into any App Inventor extension (`.aix`). Produces customized `.aix` packages that App Inventor automatically merges into both APK and AAB builds without requiring Rush CLI or external tools.
+- **Manifest & XML Viewer / Editor**: Decode binary `AndroidManifest.xml` from any APK or AAB into formatted, readable XML on your device. Search lines, edit XML tags, copy to clipboard, export `.xml` files, or repackage modified AIX extensions.
+- **AIX DeepLink Customizer**: Injects custom website domains (`https://`), custom URL schemes (`myapp://`), path prefixes, and `autoVerify` flags directly into any App Inventor extension (`.aix`). Produces customized `.aix` packages that App Inventor automatically merges into both APK and AAB builds without requiring Rush CLI or external tools.
 - **AAB → APK Standalone Converter**: Turn any Google Play App Bundle into an installable signed APK using Android bundle tools.
 - **Re-Sign Package**: Re-sign APKs or AABs with your own key without modifying any code.
 - **Ad Config Import / Export**: Save ad configurations (placements, IDs, waterfall priorities) to JSON and reuse them across builds.
