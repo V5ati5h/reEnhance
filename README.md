@@ -9,10 +9,16 @@
 </p>
 
 <p align="center">
+  <a href="https://v5ati5h.github.io/reEnhance/"><img src="https://img.shields.io/badge/Documentation-Live%20Web%20Guide-success?style=for-the-badge&logo=googledocs&logoColor=white" alt="Live Documentation"/></a>
   <a href="https://github.com/V5ati5h/reEnhance/releases/latest"><img src="https://img.shields.io/github/v/release/V5ati5h/reEnhance?style=for-the-badge&color=blue" alt="Latest Release"/></a>
   <a href="https://github.com/V5ati5h/reEnhance/releases"><img src="https://img.shields.io/github/downloads/V5ati5h/reEnhance/total?style=for-the-badge&color=green" alt="Downloads"/></a>
   <img src="https://img.shields.io/badge/Android-8.0%2B%20(API%2026%2B)-brightgreen?style=for-the-badge" alt="Android API 26+"/>
   <img src="https://img.shields.io/badge/License-Apache%202.0-orange?style=for-the-badge" alt="License"/>
+</p>
+
+<p align="center">
+  🌐 <strong>Official Interactive Documentation & Blocks Guide:</strong><br/>
+  👉 <a href="https://v5ati5h.github.io/reEnhance/"><strong>https://v5ati5h.github.io/reEnhance/</strong></a> 👈
 </p>
 
 ---
@@ -109,6 +115,33 @@ In App Inventor, click **Build > Android App (.apk)** or **Android App Bundle (.
 
 ---
 
+## 🌐 Supported Advertising Networks & Providers
+
+reEnhance features a unified multi-network advertising engine with smart waterfall routing and placement overrides:
+
+| Network / Provider | Category | Formats Supported | Integration Requirement |
+|---|---|---|---|
+| **Google AdMob** | Major Network | Banner, Large Banner, MREC, Interstitial, Rewarded, Rewarded Interstitial, App Open, Native, Consent Form (UMP) | Injected SDK bytecode + App ID |
+| **Google Ad Manager (GAM)** | Major Network | Banner, Large Banner, MREC, Interstitial, Rewarded, Rewarded Interstitial, App Open, Native | Injected SDK bytecode + App ID |
+| **AppLovin (MAX)** | Mediation & Ads | Banner, Large Banner, MREC, Interstitial, Rewarded, Rewarded Interstitial, App Open, Native | Injected SDK bytecode + SDK Key |
+| **Meta Audience Network** | Social Ads | Banner, Large Banner, MREC, Interstitial, Rewarded, Native | Injected SDK bytecode + Placement ID |
+| **Unity Ads & LevelPlay** | Gaming / Mediation | Banner, Large Banner, MREC, Interstitial, Rewarded, Native, Offerwall | Injected SDK bytecode + App Key / Game ID |
+| **Mintegral** | Mobile Ads | Banner, Large Banner, MREC, Interstitial, Rewarded, Rewarded Interstitial, Splash | Injected SDK bytecode + App ID & Key |
+| **Pangle (TikTok)** | Video Ads | Banner, Large Banner, MREC, Interstitial, Rewarded, Rewarded Interstitial, App Open, Native | Injected SDK bytecode + App ID |
+| **Start.io** | Traditional Ads | Banner, Large Banner, MREC, Interstitial, Rewarded, Cover, Native | Injected SDK bytecode + App ID |
+| **InMobi** | Global Network | Banner, Large Banner, MREC, Interstitial, Rewarded, Native, Instream | Injected SDK bytecode + Account ID |
+| **AdColony** | Video Network | Banner, Interstitial, Rewarded | Injected SDK bytecode + App ID |
+| **Chartboost** | Gaming Network | Banner, Interstitial, Rewarded | Injected SDK bytecode + App ID & Signature |
+| **DT Exchange (Fyber)** | Programmatic | Banner, Interstitial, Rewarded | Injected SDK bytecode + App ID |
+| **Leadbolt** | Traditional Ads | Banner, Interstitial, Rewarded, App Open | Injected SDK bytecode + API Key |
+| **Pollfish** | Survey Network | Interactive Surveys & Feedback | Injected SDK bytecode + API Key |
+| **TheoremReach** | Rewarded Surveys | Surveys & Rewarded Questionnaires | Injected SDK bytecode + API Key |
+| **Wootric** | User Feedback | NPS / CSAT In-App Surveys | Injected SDK bytecode + Client ID |
+| **RapidoReach & BitLabs** | Offerwalls & Surveys | Rewarded Surveys & Offerwalls | Injected SDK bytecode + App Token |
+| **House Ads** | Custom Direct Ads | Banners, Interstitials, Custom HTML | Local JSON & image assets (zero SDK required) |
+
+---
+
 ## 📡 Supported Ad Formats
 
 | Format | Dimensions / Type | Description |
@@ -122,10 +155,20 @@ In App Inventor, click **Build > Android App (.apk)** or **Android App Bundle (.
 | **App Open** | Fullscreen | Displayed when the app is brought to foreground |
 | **Native** | Custom UI Layout | Native card ad matching your app's look and feel |
 | **Consent Form** | Dialog Overlay | Google UMP (User Messaging Platform) GDPR/CCPA dialog |
+| **Offerwall & Surveys** | Web / Native Overlay | Rewarded surveys and tasks with user payout events |
 
 ---
 
-## ❓ Frequently Asked Questions (FAQ)
+## ❓ Frequently Asked Questions & Troubleshooting (FAQ)
+
+#### Q: How does reEnhance prevent "com.google.android.gms.version" and "APPLICATION_ID" crashes?
+**A**: Google Play Services and AdMob enforce strict manifest requirements:
+- Google Play Services checks for `<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />`.
+- AdMob checks for `<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="..." />`.
+
+When building with App Inventor or Kodular, these tags are completely missing from the binary `AndroidManifest.xml`. **reEnhance solves this automatically with dual-layer protection:**
+1. **Binary XML Engine (`AxmlTree`)**: Reconstructs the APK's binary manifest string pool and resource ID map, inserting the typed integer declaration `com.google.android.gms.version = 12451000` and the configured `APPLICATION_ID` into `<application>` without corrupting resources.
+2. **Runtime Memory Guard**: Injects both values directly into `ApplicationInfo.metaData` before initializing the Google Mobile Ads SDK, guaranteeing that the SDK initializes smoothly without exceptions on any Android OS version.
 
 #### Q: Why did Android say "App not installed as package appears to be invalid or conflicts with existing package"?
 **A**: Android requires any update to an app to be signed with the **exact same key** as the version already installed.
