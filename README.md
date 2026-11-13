@@ -1,7 +1,7 @@
 # reEnhance
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/V5ati5h/reEnhance/main/docs/art/banner.png" alt="reEnhance Banner" width="720" onerror="this.style.display='none'"/>
+  <img src="docs/art/banner.png" alt="reEnhance Banner" width="100%"/>
 </p>
 
 <p align="center">
