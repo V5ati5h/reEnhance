@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>reEnhance — Zero-Code Ad & SDK Injector for App Inventor & Android</title>
+  <meta name="description" content="reEnhance injects real AdMob & ad SDKs into MIT App Inventor & Kodular APKs/AABs with automatic multidex, manifest patching, and signature auto-matching." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0B0E14;
+      --card-bg: #121722;
+      --card-border: #1E2638;
+      --card-hover: #182030;
+      --primary: #3B82F6;
+      --primary-glow: rgba(59, 130, 246, 0.25);
+      --accent: #10B981;
+      --accent-glow: rgba(16, 185, 129, 0.2);
+      --purple: #8B5CF6;
+      --text: #F1F5F9;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --code-bg: #080B10;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11, 14, 20, 0.85);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #3B82F6, #10B981);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 18px;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .btn-github {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-github:hover {
+      background: var(--card-hover);
+      border-color: #334155;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 90px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(16, 185, 129, 0.08) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #60A5FA;
+      margin-bottom: 24px;
+    }
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+    }
+    h1 {
+      font-size: 54px;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #60A5FA 0%, #34D399 50%, #A78BFA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-lead {
+      font-size: 19px;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #3B82F6, #2563EB);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      box-shadow: 0 8px 24px var(--primary-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--card-bg);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      background: var(--card-hover);
+      border-color: #334155;
+      transform: translateY(-2px);
+    }
+
+    /* Badges row */
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--text-dim);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .hero-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 70px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #3B82F6;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Features Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      background: var(--card-hover);
+      border-color: #2E384D;
+      transform: translateY(-3px);
+    }
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(59, 130, 246, 0.12);
+      color: #60A5FA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .card-icon.emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34D399;
+    }
+    .card-icon.purple {
+      background: rgba(139, 92, 246, 0.12);
+      color: #A78BFA;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .card-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 4-Step Process */
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .step-item {
+      display: flex;
+      gap: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .step-item:hover { border-color: #334155; }
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .code-box {
+      background: var(--code-bg);
+      border: 1px solid #1E293B;
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #E2E8F0;
+      overflow-x: auto;
+    }
+    .code-box .keyword { color: #F472B6; }
+    .code-box .string { color: #34D399; }
+    .code-box .func { color: #60A5FA; }
+
+    /* Blocks Table */
+    .api-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .api-table th {
+      background: #0E131C;
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .api-table td {
+      padding: 16px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: middle;
+    }
+    .api-table tr:last-child td { border-bottom: none; }
+    .api-table code {
+      font-family: var(--mono);
+      color: #60A5FA;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .badge-format {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    /* FAQ */
+    .faq-container {
+      max-width: 840px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 20px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .faq-question:hover { background: var(--card-hover); }
+    .faq-answer {
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      display: none;
+    }
+    .faq-item.active .faq-answer { display: block; }
+    .faq-item.active .faq-chevron { transform: rotate(180deg); }
+    .faq-chevron {
+      transition: transform 0.2s ease;
+      color: var(--text-dim);
+    }
+
+    /* CTA Card */
+    .cta-card {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%), var(--card-bg);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 56px 40px;
+      text-align: center;
+      margin: 40px 0 80px;
+    }
+    .cta-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .cta-text {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 580px;
+      margin: 0 auto 30px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      h1 { font-size: 38px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <div class="brand-icon">rE</div>
+        <span>reEnhance</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#guide">Quick Start</a></li>
+        <li><a href="#blocks">Blocks API</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="https://github.com/V5ati5h/reEnhance/releases">Changelog</a></li>
+      </ul>
+      <a href="https://github.com/V5ati5h/reEnhance" class="btn-github" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>v1.0.0 Now Available — Zero Setup Required</span>
+      </div>
+      <h1>
+        Effortless Advertising for <br />
+        <span class="gradient-text">MIT App Inventor & Android</span>
+      </h1>
+      <p class="hero-lead">
+        Inject real Google Mobile Ads SDK bytecode into App Inventor APKs & AABs on device. No manual SDK setup, automatic signature matching for in-place updates, and seamless multi-format support.
+      </p>
+      <div class="hero-actions">
+        <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-primary">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Download Manager APK</span>
+        </a>
+        <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-secondary">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          <span>Get Extension (.aix)</span>
+        </a>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-badge-item">
+          <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          <span>Real Google Mobile Ads SDK</span>
+        </div>
+        <div class="hero-badge-item">
+          <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          <span>Keystore Auto-Match (No Reinstalls)</span>
+        </div>
+        <div class="hero-badge-item">
+          <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          <span>AAB to Standalone APK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features Grid -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Key Architecture</div>
+        <h2 class="section-title">Built for Reliability & Speed</h2>
+        <p class="section-desc">Traditional App Inventor patching relies on brittle reflection or demands modifying your AIA project. reEnhance fixes the APK at the binary level.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">DEX Bytecode Injection</h3>
+          <p class="card-text">Directly splices pre-built, verified Google Mobile Ads SDK bytecode into your APK as <code>classesN.dex</code>. No stub errors, no missing classes, zero manual compilation.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon emerald">🔑</div>
+          <h3 class="card-title">Signature Auto-Matching</h3>
+          <p class="card-text">Imports your <code>android.keystore</code> or custom keys. reEnhance reads the original certificate SHA-256 and matches it automatically so patched updates install in place.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon purple">📦</div>
+          <h3 class="card-title">Binary Manifest Editor</h3>
+          <p class="card-text">Automatically injects required <code>APPLICATION_ID</code> metadata and permissions (<code>INTERNET</code>, <code>AD_ID</code>) into compiled binary XML without breaking resource tables.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔄</div>
+          <h3 class="card-title">AAB → APK Converter</h3>
+          <p class="card-text">Easily convert Play App Bundles into standalone, signed APKs ready for testing on real devices before submitting to Google Play Console.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon emerald">🎯</div>
+          <h3 class="card-title">Automated Block Detection</h3>
+          <p class="card-text">Scans your app bytecode to detect only the ad blocks you actually called. Only confirmed ad networks are patched, keeping your app lightweight.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon purple">🚀</div>
+          <h3 class="card-title">GitHub In-App Updates</h3>
+          <p class="card-text">The Manager app checks GitHub Releases for new updates and downloads them in-app, completely independent of the Google Play Store.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start Walkthrough -->
+  <section id="guide" style="background: rgba(18, 23, 34, 0.4); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Step by Step</div>
+        <h2 class="section-title">From Blocks to Live Ads in 4 Steps</h2>
+        <p class="section-desc">You do not need to install AdMob libraries in App Inventor. Just follow this standard workflow:</p>
+      </div>
+
+      <div class="steps-container">
+        <!-- Step 1 -->
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3 class="step-title">Import Extension into App Inventor or Kodular</h3>
+            <p class="step-desc">Download <code>dev.v5ati5h.reenhance.aix</code> and import it under <strong>Palette &gt; Extension &gt; Import extension</strong>. Drag the reEnhance component onto your Screen.</p>
+            <div class="code-box">
+              <span class="keyword">Component</span> reEnhance1 : dev.v5ati5h.reenhance
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3 class="step-title">Add Your Ad Blocks</h3>
+            <p class="step-desc">Call any standard ad block inside your event handlers. Multiple banners can coexist in separate arrangements.</p>
+            <div class="code-box">
+              <span class="func">when</span> Screen1.Initialize <span class="func">do</span><br/>
+              &nbsp;&nbsp;<span class="keyword">call</span> reEnhance1.<span class="func">ShowBanner</span>(HorizontalArrangement1, <span class="string">"main_banner"</span>)<br/>
+              &nbsp;&nbsp;<span class="keyword">call</span> reEnhance1.<span class="func">ShowInterstitial</span>(<span class="string">"level_complete"</span>)
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3 class="step-title">Export your APK or AAB</h3>
+            <p class="step-desc">In MIT App Inventor, click <strong>Build &gt; Android App (.apk)</strong> or <strong>Android App Bundle (.aab)</strong> to download your built package.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3 class="step-title">Patch &amp; Install with reEnhance Manager</h3>
+            <p class="step-desc">Open reEnhance Manager on your phone &gt; select your APK &gt; review the detected ad networks &gt; tap <strong>Build Signed APK</strong>. Tap <strong>Install</strong> to update your app directly!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blocks API Reference -->
+  <section id="blocks">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">API Reference</div>
+        <h2 class="section-title">reEnhance Extension Blocks</h2>
+        <p class="section-desc">Clean, streamlined blocks matching standard App Inventor conventions.</p>
+      </div>
+
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Block Name</th>
+            <th>Type</th>
+            <th>Parameters</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ShowBanner</code></td>
+            <td><span class="badge-format">Banner</span></td>
+            <td><code>layout: Component, placement: Text</code></td>
+            <td>Shows a 320x50 inline banner inside a Horizontal or Vertical Arrangement.</td>
+          </tr>
+          <tr>
+            <td><code>ShowLargeBanner</code></td>
+            <td><span class="badge-format">320x100</span></td>
+            <td><code>layout: Component, placement: Text</code></td>
+            <td>Shows a 320x100 large banner inside a visible arrangement.</td>
+          </tr>
+          <tr>
+            <td><code>ShowMrec</code></td>
+            <td><span class="badge-format">300x250</span></td>
+            <td><code>layout: Component, placement: Text</code></td>
+            <td>Shows a 300x250 Medium Rectangle (MREC) ad.</td>
+          </tr>
+          <tr>
+            <td><code>ShowInterstitial</code></td>
+            <td><span class="badge-format">Fullscreen</span></td>
+            <td><code>placement: Text</code></td>
+            <td>Loads and displays a fullscreen interstitial transition ad.</td>
+          </tr>
+          <tr>
+            <td><code>ShowRewarded</code></td>
+            <td><span class="badge-format">Rewarded</span></td>
+            <td><code>placement: Text</code></td>
+            <td>Shows a rewarded video ad and triggers the <code>UserEarnedReward</code> event.</td>
+          </tr>
+          <tr>
+            <td><code>ShowAppOpen</code></td>
+            <td><span class="badge-format">App Open</span></td>
+            <td><code>placement: Text</code></td>
+            <td>Shows a fullscreen App Open ad when the application is brought to foreground.</td>
+          </tr>
+          <tr>
+            <td><code>HideAds</code></td>
+            <td><span class="badge-format">Control</span></td>
+            <td><em>none</em></td>
+            <td>Dismisses all active inline banner/MREC ads and closes overlay dialogs.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Help &amp; Answers</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Quick solutions to common questions and edge cases.</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Why did Android say "Package conflicts with an existing package"?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Android requires updates to be signed with the identical key as the installed app. Export your keystore from App Inventor via <strong>Projects &gt; Export Keystore</strong> (password is <code>android</code>, alias <code>androidkey</code>). In reEnhance Manager, import it under the <strong>Signing Keys</strong> tab. reEnhance will automatically match the key and sign your patched apps so they update seamlessly!
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Do I need to manually configure AdMob dependencies in App Inventor?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            <strong>No!</strong> The patcher automatically injects the official Google Mobile Ads SDK bytecode directly into the APK as a secondary DEX file (multidex) along with all required manifest entries and permissions.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I test without entering real AdMob unit IDs?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Yes! Enable <strong>Test Mode</strong> in the reEnhance Manager. It automatically seeds official Google sample ad units and test Application IDs, allowing safe end-to-end testing without risking your live AdMob account.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Where can I manage and clear cached SDK DEX files?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            In reEnhance Manager, switch to the <strong>Tools</strong> tab. Under the <strong>SDK Cache</strong> card, you can view the storage used by cached DEX bundles and tap <strong>Clear AdMob cache</strong> or <strong>Clear all</strong> to force fresh extraction from app assets.
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-card">
+        <h2 class="cta-title">Ready to Supercharge Your Apps?</h2>
+        <p class="cta-text">Download the reEnhance Manager APK and the companion extension to start serving ads in minutes.</p>
+        <div class="hero-actions" style="margin-bottom: 0;">
+          <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-primary">Download Latest Release</a>
+          <a href="https://github.com/V5ati5h/reEnhance" class="btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">reEnhance is open source and distributed under the <a href="https://github.com/V5ati5h/reEnhance/blob/main/LICENSE">Apache License 2.0</a>.</p>
+      <p>Created by <a href="https://github.com/V5ati5h" target="_blank" rel="noopener">Satish Vishwakarma</a> &bull; Not affiliated with Google or MIT.</p>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

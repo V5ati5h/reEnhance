@@ -37,7 +37,10 @@ jobs:
       - name: Prepare release directory
         run: |
           mkdir -p dist
-          # Copy extension if present in repo
+          # Copy release packages if present in repo
+          if [ -d "releases" ] && compgen -G "releases/*" > /dev/null; then
+            cp releases/* dist/
+          fi
           if [ -d "extension" ] && compgen -G "extension/*.aix" > /dev/null; then
             cp extension/*.aix dist/
           fi

@@ -39,8 +39,6 @@ Normally, App Inventor APKs cannot run real AdMob ads without complex workaround
 | **reEnhance Manager** | `.apk` | The Android app that inspects, patches, signs, and manages your APK/AAB files | [**Download Latest APK**](https://github.com/V5ati5h/reEnhance/releases/latest) |
 | **reEnhance Extension** | `.aix` | The MIT App Inventor / Kodular companion extension for your project | [**Download Latest AIX**](https://github.com/V5ati5h/reEnhance/releases/latest) |
 
-*You can also find pre-packaged files directly inside the [`extension/`](extension/) directory of this repository.*
-
 ---
 
 ## 🚀 Quick Start Guide
