@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>reEnhance — Easy Ads for MIT App Inventor, Kodular & Android Apps</title>
+  <meta name="description" content="Add real working Google AdMob and multi-network ads to your MIT App Inventor and Kodular apps in seconds. No coding, no complicated setup, zero crashes." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="art/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0B0E14;
+      --card-bg: #121722;
+      --card-border: #1E2638;
+      --card-hover: #182030;
+      --primary: #3B82F6;
+      --primary-glow: rgba(59, 130, 246, 0.25);
+      --accent: #10B981;
+      --accent-glow: rgba(16, 185, 129, 0.2);
+      --purple: #8B5CF6;
+      --text: #F1F5F9;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --code-bg: #080B10;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11, 14, 20, 0.85);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .btn-github {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-github:hover {
+      background: var(--card-hover);
+      border-color: #334155;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 50px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 650px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, rgba(16, 185, 129, 0.08) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #60A5FA;
+      margin-bottom: 24px;
+    }
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+    }
+    h1 {
+      font-size: 52px;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      max-width: 920px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #60A5FA 0%, #34D399 50%, #A78BFA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-lead {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 740px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #3B82F6, #2563EB);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      box-shadow: 0 8px 24px var(--primary-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--card-bg);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      background: var(--card-hover);
+      border-color: #334155;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      background: transparent;
+      color: #94A3B8;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px dashed var(--card-border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover {
+      color: #fff;
+      border-color: #60A5FA;
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    /* Badges row */
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      color: var(--text-dim);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .hero-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    /* Networks Banner */
+    .networks-box {
+      margin-top: 40px;
+      padding: 20px 24px;
+      background: rgba(18, 23, 34, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .network-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      color: #CBD5E1;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Section Styles */
+    section {
+      padding: 70px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #3B82F6;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Features Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .card:hover {
+      background: var(--card-hover);
+      border-color: #2E384D;
+      transform: translateY(-3px);
+    }
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(59, 130, 246, 0.12);
+      color: #60A5FA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .card-icon.emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34D399;
+    }
+    .card-icon.purple {
+      background: rgba(139, 92, 246, 0.12);
+      color: #A78BFA;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .card-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 4-Step Process */
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .step-item {
+      display: flex;
+      gap: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .step-item:hover { border-color: #334155; }
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .block-preview {
+      background: var(--code-bg);
+      border: 1px solid #1E293B;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #E2E8F0;
+      line-height: 1.7;
+    }
+    .block-preview .block-event { color: #F59E0B; font-weight: 600; }
+    .block-preview .block-call { color: #60A5FA; font-weight: 600; }
+    .block-preview .block-param { color: #34D399; }
+    .block-preview .block-target { color: #A78BFA; }
+
+    /* Blocks Table */
+    .api-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .api-table th {
+      background: #0E131C;
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .api-table td {
+      padding: 18px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: middle;
+    }
+    .api-table tr:last-child td { border-bottom: none; }
+    .api-table code {
+      font-family: var(--mono);
+      color: #60A5FA;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .badge-format {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    /* FAQ */
+    .faq-container {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 20px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .faq-question:hover { background: var(--card-hover); }
+    .faq-answer {
+      padding: 0 24px 22px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      display: none;
+    }
+    .faq-item.active .faq-answer { display: block; }
+    .faq-item.active .faq-chevron { transform: rotate(180deg); }
+    .faq-chevron {
+      transition: transform 0.2s ease;
+      color: var(--text-dim);
+    }
+
+    /* CTA Card */
+    .cta-card {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%), var(--card-bg);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 56px 40px;
+      text-align: center;
+      margin: 40px 0 80px;
+    }
+    .cta-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .cta-text {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      h1 { font-size: 36px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <img src="art/icon.png" alt="reEnhance Logo" width="36" height="36" style="border-radius: 50%; box-shadow: 0 0 12px rgba(59, 130, 246, 0.4); display: block;" />
+        <span>reEnhance</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#guide">4 Easy Steps</a></li>
+        <li><a href="#blocks">Blocks Cheat Sheet</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="https://github.com/V5ati5h/reEnhance/releases">Downloads</a></li>
+      </ul>
+      <a href="https://github.com/V5ati5h/reEnhance" class="btn-github" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>Version 1.0.0 Ready &bull; Zero Coding Required</span>
+      </div>
+      <h1>
+        Real Working Ads for <br />
+        <span class="gradient-text">MIT App Inventor &amp; Kodular</span>
+      </h1>
+      <p class="hero-lead">
+        Add Google AdMob and 18+ popular ad networks to your apps in seconds. No complex setups, no code editing, and no crash errors. Just drag your blocks, enhance your app, and start earning.
+      </p>
+      <div class="hero-actions">
+        <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-primary">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Download Manager App (.apk)</span>
+        </a>
+        <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-secondary">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          <span>Get Extension (.aix)</span>
+        </a>
+        <a href="extension/reEnhance-demo.aia" class="btn-outline">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Try Demo Project (.aia)</span>
+        </a>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-badge-item">
+          <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          <span>Real Google AdMob Ads</span>
+        </div>
+        <div class="hero-badge-item">
+          <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          <span>Updates Without Reinstalling</span>
+        </div>
+        <div class="hero-badge-item">
+          <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          <span>Test on Phone with 1-Tap</span>
+        </div>
+      </div>
+
+      <!-- Supported Networks Strip -->
+      <div class="networks-box">
+        <span style="font-size: 13px; font-weight: 700; color: #94A3B8; margin-right: 6px;">Supported Networks:</span>
+        <span class="network-tag">Google AdMob</span>
+        <span class="network-tag">Google Ad Manager</span>
+        <span class="network-tag">Unity Ads</span>
+        <span class="network-tag">AppLovin (MAX)</span>
+        <span class="network-tag">IronSource</span>
+        <span class="network-tag">Meta (Facebook)</span>
+        <span class="network-tag">StartApp</span>
+        <span class="network-tag">Mintegral</span>
+        <span class="network-tag">Pangle</span>
+        <span class="network-tag">InMobi</span>
+        <span class="network-tag">Chartboost</span>
+        <span class="network-tag">Offers &amp; Surveys</span>
+      </div>
+
+      <!-- Hero Banner Preview -->
+      <div style="margin-top: 48px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--card-border); box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);">
+        <img src="art/banner.png" alt="reEnhance Visual Guide" style="width: 100%; height: auto; display: block;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Why reEnhance -->
+  <section id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Simple &amp; Reliable</div>
+        <h2 class="section-title">Why App Creators Love reEnhance</h2>
+        <p class="section-desc">Building apps with blocks is fun and easy, but getting real ads to work has always caused headaches and crashes. reEnhance takes care of everything for you.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Real Working Ads</h3>
+          <p class="card-text">Connects directly to official ad networks like Google AdMob. Your ads actually load and show up on real phones without crashing or missing file errors.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon emerald">🔄</div>
+          <h3 class="card-title">Update Without Reinstalling</h3>
+          <p class="card-text">Keeps your app's digital key matched. When you enhance and install a new version, it upgrades smoothly over your existing app without deleting user data.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon purple">🛡️</div>
+          <h3 class="card-title">Automatic Setup</h3>
+          <p class="card-text">No need to configure complicated permissions or settings files. reEnhance sets up internet access and ad permissions automatically behind the scenes.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <h3 class="card-title">Easy Phone Testing</h3>
+          <p class="card-text">Turn Google Play App Bundles (.aab) into regular apps (.apk) that you can install directly on your phone to test before publishing.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon emerald">🚀</div>
+          <h3 class="card-title">Keeps Your App Fast</h3>
+          <p class="card-text">Smart app scanner only enables the ad formats you actually use in your blocks. Your app stays lightweight, fast, and responsive.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon purple">✨</div>
+          <h3 class="card-title">Safe Test Mode</h3>
+          <p class="card-text">Test all your banners, video ads, and buttons safely with sample ads so you never risk your ad account while building.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Easy Steps -->
+  <section id="guide" style="background: rgba(18, 23, 34, 0.4); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Quick Start Guide</div>
+        <h2 class="section-title">From Blocks to Live Ads in 4 Simple Steps</h2>
+        <p class="section-desc">You do not need any coding skills or complex software. Just follow this easy workflow:</p>
+      </div>
+
+      <div class="steps-container">
+        <!-- Step 1 -->
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3 class="step-title">Add the Extension to Your Project</h3>
+            <p class="step-desc">Download <code>dev.v5ati5h.reenhance.aix</code> and import it into MIT App Inventor or Kodular (under <strong>Palette &gt; Extension &gt; Import extension</strong>). Drag the <strong>reEnhance</strong> component onto your screen.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3 class="step-title">Snap Your Ad Blocks</h3>
+            <p class="step-desc">In the Blocks editor, place the ad blocks wherever you want them to appear (for example, show a banner when the screen opens, or show a video when a button is clicked):</p>
+            <div class="block-preview">
+              <span class="block-event">when Screen1.Initialize do</span><br/>
+              &nbsp;&nbsp;<span class="block-call">call reEnhance1.ShowBanner</span> ( <span class="block-target">container:</span> HorizontalArrangement1, <span class="block-param">placement:</span> "main_banner" )<br/>
+              <span class="block-event">when ButtonWatchVideo.Click do</span><br/>
+              &nbsp;&nbsp;<span class="block-call">call reEnhance1.ShowRewarded</span> ( <span class="block-param">placement:</span> "extra_lives" )
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3 class="step-title">Export Your App</h3>
+            <p class="step-desc">In App Inventor, click <strong>Build &gt; Android App (.apk)</strong> to download your app file to your phone or computer.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3 class="step-title">Open reEnhance Manager &amp; Tap Enhance</h3>
+            <p class="step-desc">Open the <strong>reEnhance Manager</strong> app on your Android phone, select your exported app, and tap <strong>Build Signed APK</strong>. Once ready, tap <strong>Install</strong>. That's it — your real ads are now working!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blocks Cheat Sheet -->
+  <section id="blocks">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Blocks Guide</div>
+        <h2 class="section-title">Popular Ad Blocks</h2>
+        <p class="section-desc">Clean, simple blocks that fit naturally into your App Inventor projects.</p>
+      </div>
+
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Block Name</th>
+            <th>Type</th>
+            <th>How It Works</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ShowBanner</code></td>
+            <td><span class="badge-format">Banner</span></td>
+            <td>Shows a standard small banner ad inside any Horizontal or Vertical Arrangement on your screen.</td>
+          </tr>
+          <tr>
+            <td><code>ShowLargeBanner</code></td>
+            <td><span class="badge-format">Large Banner</span></td>
+            <td>Shows a taller (320x100) banner that stands out and gets higher visibility.</td>
+          </tr>
+          <tr>
+            <td><code>ShowMrec</code></td>
+            <td><span class="badge-format">Square Ad</span></td>
+            <td>Shows a medium square rectangle ad (300x250), great for pause menus or between content cards.</td>
+          </tr>
+          <tr>
+            <td><code>ShowInterstitial</code></td>
+            <td><span class="badge-format">Fullscreen</span></td>
+            <td>Shows a full-screen ad between screens or when the user finishes a game level.</td>
+          </tr>
+          <tr>
+            <td><code>ShowRewarded</code></td>
+            <td><span class="badge-format">Rewarded Video</span></td>
+            <td>Plays a video ad that gives users in-app rewards (coins, hints, extra lives) upon completion.</td>
+          </tr>
+          <tr>
+            <td><code>ShowAppOpen</code></td>
+            <td><span class="badge-format">App Open</span></td>
+            <td>Displays a welcome ad when users first open or return back to your app.</td>
+          </tr>
+          <tr>
+            <td><code>HideAds</code></td>
+            <td><span class="badge-format">Clean Up</span></td>
+            <td>Hides and cleans up all active banner ads when navigating away or pressing the back button.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Common Questions</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Everything you need to know to get started smoothly.</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Do I need any programming experience or code knowledge?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Not at all! If you can drag blocks in MIT App Inventor or Kodular, you can use reEnhance. You simply drag the extension, snap the ad blocks where you want them, and let the reEnhance Manager app prepare your app with one tap.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Will ads show up when testing with the MIT AI Companion?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            The AI Companion is only designed for quick visual layout testing. Real ads require your actual app package. Simply build your app (.apk) in App Inventor and enhance it once with the reEnhance Manager app on your phone to see real ads live!
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Why did my phone say "App not installed" or "Package conflict"?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Android checks the digital signature of every app. If you previously installed your app from App Inventor, Android will only let you update it if the signature matches. To fix this permanently: export your keystore from App Inventor (<strong>Projects &gt; Export Keystore</strong>), import it once into reEnhance Manager under <strong>Signing Keys</strong>, and every update will install smoothly over your existing app without having to delete it first!
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I test ads safely without risking my AdMob account?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Yes! In the reEnhance Manager app, simply switch on <strong>Test Mode</strong>. It automatically uses official Google sample ad units so you can test all your banners, rewarded videos, and interstitials safely without violating any ad policies.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Which ad networks can I use?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            reEnhance supports over 18 networks including Google AdMob, Google Ad Manager, Unity Ads, AppLovin (MAX), IronSource (LevelPlay), Meta Audience Network, StartApp, Mintegral, Pangle, InMobi, Chartboost, Fyber, Vungle, plus top survey and offerwall platforms.
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-card">
+        <h2 class="cta-title">Ready to Add Ads to Your Apps?</h2>
+        <p class="cta-text">Download the reEnhance Manager app and companion extension to start showing real ads in minutes.</p>
+        <div class="hero-actions" style="margin-bottom: 0;">
+          <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-primary">Download Latest Release</a>
+          <a href="extension/reEnhance-demo.aia" class="btn-secondary">Download Demo Project (.aia)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">reEnhance is free, open source, and distributed under the <a href="https://github.com/V5ati5h/reEnhance/blob/main/LICENSE">Apache License 2.0</a>.</p>
+      <p>Created by <a href="https://github.com/V5ati5h" target="_blank" rel="noopener">Satish Vishwakarma</a> &bull; Not affiliated with Google or MIT.</p>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
