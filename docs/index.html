@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>reEnhance — Zero-Code Ad & SDK Injector for App Inventor & Android</title>
-  <meta name="description" content="reEnhance injects real AdMob & ad SDKs into MIT App Inventor & Kodular APKs/AABs with automatic multidex, manifest patching, and signature auto-matching." />
+  <title>reEnhance — Easy Ads for MIT App Inventor, Kodular & Android Apps</title>
+  <meta name="description" content="Add real working Google AdMob and multi-network ads to your MIT App Inventor and Kodular apps in seconds. No coding, no complicated setup, zero crashes." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="art/icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,19 +77,6 @@
       text-decoration: none;
       letter-spacing: -0.5px;
     }
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #3B82F6, #10B981);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #fff;
-      font-size: 18px;
-      box-shadow: 0 4px 14px var(--primary-glow);
-    }
     .nav-links {
       display: flex;
       align-items: center;
@@ -125,7 +112,7 @@
 
     /* Hero */
     .hero {
-      padding: 90px 0 60px;
+      padding: 80px 0 50px;
       text-align: center;
       position: relative;
     }
@@ -135,9 +122,9 @@
       top: -40px;
       left: 50%;
       transform: translateX(-50%);
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(16, 185, 129, 0.08) 40%, transparent 70%);
+      width: 650px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, rgba(16, 185, 129, 0.08) 40%, transparent 70%);
       pointer-events: none;
       z-index: -1;
     }
@@ -162,12 +149,12 @@
       box-shadow: 0 0 10px #10B981;
     }
     h1 {
-      font-size: 54px;
+      font-size: 52px;
       line-height: 1.15;
       font-weight: 800;
       letter-spacing: -1.5px;
       margin-bottom: 20px;
-      max-width: 900px;
+      max-width: 920px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -177,11 +164,12 @@
       -webkit-text-fill-color: transparent;
     }
     .hero-lead {
-      font-size: 19px;
+      font-size: 18px;
       color: var(--text-muted);
-      max-width: 720px;
+      max-width: 740px;
       margin: 0 auto 36px;
       font-weight: 400;
+      line-height: 1.65;
     }
     .hero-actions {
       display: flex;
@@ -189,7 +177,7 @@
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
     .btn-primary {
       display: inline-flex;
@@ -228,21 +216,67 @@
       border-color: #334155;
       transform: translateY(-2px);
     }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      background: transparent;
+      color: #94A3B8;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px dashed var(--card-border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover {
+      color: #fff;
+      border-color: #60A5FA;
+      background: rgba(59, 130, 246, 0.05);
+    }
 
     /* Badges row */
     .hero-badges {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 24px;
       flex-wrap: wrap;
       color: var(--text-dim);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
     }
     .hero-badge-item {
       display: flex;
       align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    /* Networks Banner */
+    .networks-box {
+      margin-top: 40px;
+      padding: 20px 24px;
+      background: rgba(18, 23, 34, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .network-tag {
+      display: inline-flex;
+      align-items: center;
       gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      color: #CBD5E1;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     /* Section Styles */
@@ -270,7 +304,7 @@
     .section-desc {
       font-size: 16px;
       color: var(--text-muted);
-      max-width: 620px;
+      max-width: 650px;
       margin: 0 auto;
     }
 
@@ -280,11 +314,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -292,7 +321,6 @@
       padding: 32px;
       transition: all 0.25s ease;
       position: relative;
-      overflow: hidden;
     }
     .card:hover {
       background: var(--card-hover);
@@ -365,29 +393,31 @@
     }
     .step-content { flex: 1; }
     .step-title {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     .step-desc {
       font-size: 14px;
       color: var(--text-muted);
       margin-bottom: 14px;
+      line-height: 1.6;
     }
-    .code-box {
+    .block-preview {
       background: var(--code-bg);
       border: 1px solid #1E293B;
       border-radius: var(--radius-sm);
-      padding: 12px 16px;
+      padding: 14px 18px;
       font-family: var(--mono);
       font-size: 13px;
       color: #E2E8F0;
-      overflow-x: auto;
+      line-height: 1.7;
     }
-    .code-box .keyword { color: #F472B6; }
-    .code-box .string { color: #34D399; }
-    .code-box .func { color: #60A5FA; }
+    .block-preview .block-event { color: #F59E0B; font-weight: 600; }
+    .block-preview .block-call { color: #60A5FA; font-weight: 600; }
+    .block-preview .block-param { color: #34D399; }
+    .block-preview .block-target { color: #A78BFA; }
 
     /* Blocks Table */
     .api-table {
@@ -411,7 +441,7 @@
       border-bottom: 1px solid var(--card-border);
     }
     .api-table td {
-      padding: 16px 20px;
+      padding: 18px 20px;
       font-size: 14px;
       border-bottom: 1px solid var(--card-border);
       vertical-align: middle;
@@ -427,9 +457,9 @@
     }
     .badge-format {
       display: inline-block;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 3px 10px;
       border-radius: 999px;
       background: rgba(16, 185, 129, 0.12);
       color: #34D399;
@@ -438,7 +468,7 @@
 
     /* FAQ */
     .faq-container {
-      max-width: 840px;
+      max-width: 860px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -464,7 +494,7 @@
     }
     .faq-question:hover { background: var(--card-hover); }
     .faq-answer {
-      padding: 0 24px 20px;
+      padding: 0 24px 22px;
       font-size: 14px;
       color: var(--text-muted);
       line-height: 1.7;
@@ -494,7 +524,7 @@
     .cta-text {
       color: var(--text-muted);
       font-size: 16px;
-      max-width: 580px;
+      max-width: 600px;
       margin: 0 auto 30px;
     }
 
@@ -511,9 +541,8 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      h1 { font-size: 38px; }
+      h1 { font-size: 36px; }
       .grid-3 { grid-template-columns: 1fr; }
-      .grid-2 { grid-template-columns: 1fr; }
       .nav-links { display: none; }
     }
   </style>
@@ -528,11 +557,11 @@
         <span>reEnhance</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#guide">Quick Start</a></li>
-        <li><a href="#blocks">Blocks API</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#guide">4 Easy Steps</a></li>
+        <li><a href="#blocks">Blocks Cheat Sheet</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://github.com/V5ati5h/reEnhance/releases">Changelog</a></li>
+        <li><a href="https://github.com/V5ati5h/reEnhance/releases">Downloads</a></li>
       </ul>
       <a href="https://github.com/V5ati5h/reEnhance" class="btn-github" target="_blank" rel="noopener">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -546,98 +575,119 @@
     <div class="container">
       <div class="pill">
         <span class="pill-dot"></span>
-        <span>v1.0.0 Now Available — Zero Setup Required</span>
+        <span>Version 1.0.0 Ready &bull; Zero Coding Required</span>
       </div>
       <h1>
-        Effortless Advertising for <br />
-        <span class="gradient-text">MIT App Inventor & Android</span>
+        Real Working Ads for <br />
+        <span class="gradient-text">MIT App Inventor &amp; Kodular</span>
       </h1>
       <p class="hero-lead">
-        Inject real Google Mobile Ads SDK bytecode into App Inventor APKs & AABs on device. No manual SDK setup, automatic signature matching for in-place updates, and seamless multi-format support.
+        Add Google AdMob and 18+ popular ad networks to your apps in seconds. No complex setups, no code editing, and no crash errors. Just drag your blocks, enhance your app, and start earning.
       </p>
       <div class="hero-actions">
         <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-primary">
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          <span>Download Manager APK</span>
+          <span>Download Manager App (.apk)</span>
         </a>
         <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-secondary">
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
           <span>Get Extension (.aix)</span>
         </a>
+        <a href="extension/reEnhance-demo.aia" class="btn-outline">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Try Demo Project (.aia)</span>
+        </a>
       </div>
       <div class="hero-badges">
         <div class="hero-badge-item">
           <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-          <span>Real Google Mobile Ads SDK</span>
+          <span>Real Google AdMob Ads</span>
         </div>
         <div class="hero-badge-item">
           <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-          <span>Keystore Auto-Match (No Reinstalls)</span>
+          <span>Updates Without Reinstalling</span>
         </div>
         <div class="hero-badge-item">
           <svg width="16" height="16" fill="currentColor" color="#10B981" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-          <span>AAB to Standalone APK</span>
+          <span>Test on Phone with 1-Tap</span>
         </div>
+      </div>
+
+      <!-- Supported Networks Strip -->
+      <div class="networks-box">
+        <span style="font-size: 13px; font-weight: 700; color: #94A3B8; margin-right: 6px;">Supported Networks:</span>
+        <span class="network-tag">Google AdMob</span>
+        <span class="network-tag">Google Ad Manager</span>
+        <span class="network-tag">Unity Ads</span>
+        <span class="network-tag">AppLovin (MAX)</span>
+        <span class="network-tag">IronSource</span>
+        <span class="network-tag">Meta (Facebook)</span>
+        <span class="network-tag">StartApp</span>
+        <span class="network-tag">Mintegral</span>
+        <span class="network-tag">Pangle</span>
+        <span class="network-tag">InMobi</span>
+        <span class="network-tag">Chartboost</span>
+        <span class="network-tag">Offers &amp; Surveys</span>
       </div>
 
       <!-- Hero Banner Preview -->
       <div style="margin-top: 48px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--card-border); box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);">
-        <img src="art/banner.png" alt="reEnhance Zero-Code Ad & SDK Injector" style="width: 100%; height: auto; display: block;" />
+        <img src="art/banner.png" alt="reEnhance Visual Guide" style="width: 100%; height: auto; display: block;" />
       </div>
     </div>
   </section>
 
-  <!-- Core Features Grid -->
-  <section id="features">
+  <!-- Why reEnhance -->
+  <section id="how-it-works">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">Key Architecture</div>
-        <h2 class="section-title">Built for Reliability & Speed</h2>
-        <p class="section-desc">Traditional App Inventor patching relies on brittle reflection or demands modifying your AIA project. reEnhance fixes the APK at the binary level.</p>
+        <div class="section-tag">Simple &amp; Reliable</div>
+        <h2 class="section-title">Why App Creators Love reEnhance</h2>
+        <p class="section-desc">Building apps with blocks is fun and easy, but getting real ads to work has always caused headaches and crashes. reEnhance takes care of everything for you.</p>
       </div>
 
       <div class="grid-3">
         <div class="card">
           <div class="card-icon">⚡</div>
-          <h3 class="card-title">DEX Bytecode Injection</h3>
-          <p class="card-text">Directly splices pre-built, verified Google Mobile Ads SDK bytecode into your APK as <code>classesN.dex</code>. No stub errors, no missing classes, zero manual compilation.</p>
+          <h3 class="card-title">Real Working Ads</h3>
+          <p class="card-text">Connects directly to official ad networks like Google AdMob. Your ads actually load and show up on real phones without crashing or missing file errors.</p>
         </div>
         <div class="card">
-          <div class="card-icon emerald">🔑</div>
-          <h3 class="card-title">Signature Auto-Matching</h3>
-          <p class="card-text">Imports your <code>android.keystore</code> or custom keys. reEnhance reads the original certificate SHA-256 and matches it automatically so patched updates install in place.</p>
+          <div class="card-icon emerald">🔄</div>
+          <h3 class="card-title">Update Without Reinstalling</h3>
+          <p class="card-text">Keeps your app's digital key matched. When you enhance and install a new version, it upgrades smoothly over your existing app without deleting user data.</p>
         </div>
         <div class="card">
-          <div class="card-icon purple">📦</div>
-          <h3 class="card-title">Binary Manifest Editor</h3>
-          <p class="card-text">Automatically injects required <code>APPLICATION_ID</code> metadata and permissions (<code>INTERNET</code>, <code>AD_ID</code>) into compiled binary XML without breaking resource tables.</p>
+          <div class="card-icon purple">🛡️</div>
+          <h3 class="card-title">Automatic Setup</h3>
+          <p class="card-text">No need to configure complicated permissions or settings files. reEnhance sets up internet access and ad permissions automatically behind the scenes.</p>
         </div>
         <div class="card">
-          <div class="card-icon">🔄</div>
-          <h3 class="card-title">AAB → APK Converter</h3>
-          <p class="card-text">Easily convert Play App Bundles into standalone, signed APKs ready for testing on real devices before submitting to Google Play Console.</p>
+          <div class="card-icon">📱</div>
+          <h3 class="card-title">Easy Phone Testing</h3>
+          <p class="card-text">Turn Google Play App Bundles (.aab) into regular apps (.apk) that you can install directly on your phone to test before publishing.</p>
         </div>
         <div class="card">
-          <div class="card-icon emerald">🎯</div>
-          <h3 class="card-title">Automated Block Detection</h3>
-          <p class="card-text">Scans your app bytecode to detect only the ad blocks you actually called. Only confirmed ad networks are patched, keeping your app lightweight.</p>
+          <div class="card-icon emerald">🚀</div>
+          <h3 class="card-title">Keeps Your App Fast</h3>
+          <p class="card-text">Smart app scanner only enables the ad formats you actually use in your blocks. Your app stays lightweight, fast, and responsive.</p>
         </div>
         <div class="card">
-          <div class="card-icon purple">🚀</div>
-          <h3 class="card-title">GitHub In-App Updates</h3>
-          <p class="card-text">The Manager app checks GitHub Releases for new updates and downloads them in-app, completely independent of the Google Play Store.</p>
+          <div class="card-icon purple">✨</div>
+          <h3 class="card-title">Safe Test Mode</h3>
+          <p class="card-text">Test all your banners, video ads, and buttons safely with sample ads so you never risk your ad account while building.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Quick Start Walkthrough -->
+  <!-- 4 Easy Steps -->
   <section id="guide" style="background: rgba(18, 23, 34, 0.4); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">Step by Step</div>
-        <h2 class="section-title">From Blocks to Live Ads in 4 Steps</h2>
-        <p class="section-desc">You do not need to install AdMob libraries in App Inventor. Just follow this standard workflow:</p>
+        <div class="section-tag">Quick Start Guide</div>
+        <h2 class="section-title">From Blocks to Live Ads in 4 Simple Steps</h2>
+        <p class="section-desc">You do not need any coding skills or complex software. Just follow this easy workflow:</p>
       </div>
 
       <div class="steps-container">
@@ -645,11 +695,8 @@
         <div class="step-item">
           <div class="step-number">1</div>
           <div class="step-content">
-            <h3 class="step-title">Import Extension into App Inventor or Kodular</h3>
-            <p class="step-desc">Download <code>dev.v5ati5h.reenhance.aix</code> and import it under <strong>Palette &gt; Extension &gt; Import extension</strong>. Drag the reEnhance component onto your Screen.</p>
-            <div class="code-box">
-              <span class="keyword">Component</span> reEnhance1 : dev.v5ati5h.reenhance
-            </div>
+            <h3 class="step-title">Add the Extension to Your Project</h3>
+            <p class="step-desc">Download <code>dev.v5ati5h.reenhance.aix</code> and import it into MIT App Inventor or Kodular (under <strong>Palette &gt; Extension &gt; Import extension</strong>). Drag the <strong>reEnhance</strong> component onto your screen.</p>
           </div>
         </div>
 
@@ -657,12 +704,13 @@
         <div class="step-item">
           <div class="step-number">2</div>
           <div class="step-content">
-            <h3 class="step-title">Add Your Ad Blocks</h3>
-            <p class="step-desc">Call any standard ad block inside your event handlers. Multiple banners can coexist in separate arrangements.</p>
-            <div class="code-box">
-              <span class="func">when</span> Screen1.Initialize <span class="func">do</span><br/>
-              &nbsp;&nbsp;<span class="keyword">call</span> reEnhance1.<span class="func">ShowBanner</span>(HorizontalArrangement1, <span class="string">"main_banner"</span>)<br/>
-              &nbsp;&nbsp;<span class="keyword">call</span> reEnhance1.<span class="func">ShowInterstitial</span>(<span class="string">"level_complete"</span>)
+            <h3 class="step-title">Snap Your Ad Blocks</h3>
+            <p class="step-desc">In the Blocks editor, place the ad blocks wherever you want them to appear (for example, show a banner when the screen opens, or show a video when a button is clicked):</p>
+            <div class="block-preview">
+              <span class="block-event">when Screen1.Initialize do</span><br/>
+              &nbsp;&nbsp;<span class="block-call">call reEnhance1.ShowBanner</span> ( <span class="block-target">container:</span> HorizontalArrangement1, <span class="block-param">placement:</span> "main_banner" )<br/>
+              <span class="block-event">when ButtonWatchVideo.Click do</span><br/>
+              &nbsp;&nbsp;<span class="block-call">call reEnhance1.ShowRewarded</span> ( <span class="block-param">placement:</span> "extra_lives" )
             </div>
           </div>
         </div>
@@ -671,8 +719,8 @@
         <div class="step-item">
           <div class="step-number">3</div>
           <div class="step-content">
-            <h3 class="step-title">Export your APK or AAB</h3>
-            <p class="step-desc">In MIT App Inventor, click <strong>Build &gt; Android App (.apk)</strong> or <strong>Android App Bundle (.aab)</strong> to download your built package.</p>
+            <h3 class="step-title">Export Your App</h3>
+            <p class="step-desc">In App Inventor, click <strong>Build &gt; Android App (.apk)</strong> to download your app file to your phone or computer.</p>
           </div>
         </div>
 
@@ -680,21 +728,21 @@
         <div class="step-item">
           <div class="step-number">4</div>
           <div class="step-content">
-            <h3 class="step-title">Patch &amp; Install with reEnhance Manager</h3>
-            <p class="step-desc">Open reEnhance Manager on your phone &gt; select your APK &gt; review the detected ad networks &gt; tap <strong>Build Signed APK</strong>. Tap <strong>Install</strong> to update your app directly!</p>
+            <h3 class="step-title">Open reEnhance Manager &amp; Tap Enhance</h3>
+            <p class="step-desc">Open the <strong>reEnhance Manager</strong> app on your Android phone, select your exported app, and tap <strong>Build Signed APK</strong>. Once ready, tap <strong>Install</strong>. That's it — your real ads are now working!</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Blocks API Reference -->
+  <!-- Blocks Cheat Sheet -->
   <section id="blocks">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">API Reference</div>
-        <h2 class="section-title">reEnhance Extension Blocks</h2>
-        <p class="section-desc">Clean, streamlined blocks matching standard App Inventor conventions.</p>
+        <div class="section-tag">Blocks Guide</div>
+        <h2 class="section-title">Popular Ad Blocks</h2>
+        <p class="section-desc">Clean, simple blocks that fit naturally into your App Inventor projects.</p>
       </div>
 
       <table class="api-table">
@@ -702,52 +750,44 @@
           <tr>
             <th>Block Name</th>
             <th>Type</th>
-            <th>Parameters</th>
-            <th>Description</th>
+            <th>How It Works</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><code>ShowBanner</code></td>
             <td><span class="badge-format">Banner</span></td>
-            <td><code>layout: Component, placement: Text</code></td>
-            <td>Shows a 320x50 inline banner inside a Horizontal or Vertical Arrangement.</td>
+            <td>Shows a standard small banner ad inside any Horizontal or Vertical Arrangement on your screen.</td>
           </tr>
           <tr>
             <td><code>ShowLargeBanner</code></td>
-            <td><span class="badge-format">320x100</span></td>
-            <td><code>layout: Component, placement: Text</code></td>
-            <td>Shows a 320x100 large banner inside a visible arrangement.</td>
+            <td><span class="badge-format">Large Banner</span></td>
+            <td>Shows a taller (320x100) banner that stands out and gets higher visibility.</td>
           </tr>
           <tr>
             <td><code>ShowMrec</code></td>
-            <td><span class="badge-format">300x250</span></td>
-            <td><code>layout: Component, placement: Text</code></td>
-            <td>Shows a 300x250 Medium Rectangle (MREC) ad.</td>
+            <td><span class="badge-format">Square Ad</span></td>
+            <td>Shows a medium square rectangle ad (300x250), great for pause menus or between content cards.</td>
           </tr>
           <tr>
             <td><code>ShowInterstitial</code></td>
             <td><span class="badge-format">Fullscreen</span></td>
-            <td><code>placement: Text</code></td>
-            <td>Loads and displays a fullscreen interstitial transition ad.</td>
+            <td>Shows a full-screen ad between screens or when the user finishes a game level.</td>
           </tr>
           <tr>
             <td><code>ShowRewarded</code></td>
-            <td><span class="badge-format">Rewarded</span></td>
-            <td><code>placement: Text</code></td>
-            <td>Shows a rewarded video ad and triggers the <code>UserEarnedReward</code> event.</td>
+            <td><span class="badge-format">Rewarded Video</span></td>
+            <td>Plays a video ad that gives users in-app rewards (coins, hints, extra lives) upon completion.</td>
           </tr>
           <tr>
             <td><code>ShowAppOpen</code></td>
             <td><span class="badge-format">App Open</span></td>
-            <td><code>placement: Text</code></td>
-            <td>Shows a fullscreen App Open ad when the application is brought to foreground.</td>
+            <td>Displays a welcome ad when users first open or return back to your app.</td>
           </tr>
           <tr>
             <td><code>HideAds</code></td>
-            <td><span class="badge-format">Control</span></td>
-            <td><em>none</em></td>
-            <td>Dismisses all active inline banner/MREC ads and closes overlay dialogs.</td>
+            <td><span class="badge-format">Clean Up</span></td>
+            <td>Hides and cleans up all active banner ads when navigating away or pressing the back button.</td>
           </tr>
         </tbody>
       </table>
@@ -758,60 +798,70 @@
   <section id="faq">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">Help &amp; Answers</div>
+        <div class="section-tag">Common Questions</div>
         <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-desc">Quick solutions to common questions and edge cases.</p>
+        <p class="section-desc">Everything you need to know to get started smoothly.</p>
       </div>
 
       <div class="faq-container">
         <div class="faq-item">
           <div class="faq-question">
-            <span>Why did Android say "Package conflicts with an existing package"?</span>
+            <span>Do I need any programming experience or code knowledge?</span>
             <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
           <div class="faq-answer">
-            Android requires updates to be signed with the identical key as the installed app. Export your keystore from App Inventor via <strong>Projects &gt; Export Keystore</strong> (password is <code>android</code>, alias <code>androidkey</code>). In reEnhance Manager, import it under the <strong>Signing Keys</strong> tab. reEnhance will automatically match the key and sign your patched apps so they update seamlessly!
+            Not at all! If you can drag blocks in MIT App Inventor or Kodular, you can use reEnhance. You simply drag the extension, snap the ad blocks where you want them, and let the reEnhance Manager app prepare your app with one tap.
           </div>
         </div>
 
         <div class="faq-item">
           <div class="faq-question">
-            <span>Do I need to manually configure AdMob dependencies in App Inventor?</span>
+            <span>Will ads show up when testing with the MIT AI Companion?</span>
             <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
           <div class="faq-answer">
-            <strong>No!</strong> The patcher automatically injects the official Google Mobile Ads SDK bytecode directly into the APK as a secondary DEX file (multidex) along with all required manifest entries and permissions.
+            The AI Companion is only designed for quick visual layout testing. Real ads require your actual app package. Simply build your app (.apk) in App Inventor and enhance it once with the reEnhance Manager app on your phone to see real ads live!
           </div>
         </div>
 
         <div class="faq-item">
           <div class="faq-question">
-            <span>Can I test without entering real AdMob unit IDs?</span>
+            <span>Why did my phone say "App not installed" or "Package conflict"?</span>
             <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
           <div class="faq-answer">
-            Yes! Enable <strong>Test Mode</strong> in the reEnhance Manager. It automatically seeds official Google sample ad units and test Application IDs, allowing safe end-to-end testing without risking your live AdMob account.
+            Android checks the digital signature of every app. If you previously installed your app from App Inventor, Android will only let you update it if the signature matches. To fix this permanently: export your keystore from App Inventor (<strong>Projects &gt; Export Keystore</strong>), import it once into reEnhance Manager under <strong>Signing Keys</strong>, and every update will install smoothly over your existing app without having to delete it first!
           </div>
         </div>
 
         <div class="faq-item">
           <div class="faq-question">
-            <span>Where can I manage and clear cached SDK DEX files?</span>
+            <span>Can I test ads safely without risking my AdMob account?</span>
             <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
           <div class="faq-answer">
-            In reEnhance Manager, switch to the <strong>Tools</strong> tab. Under the <strong>SDK Cache</strong> card, you can view the storage used by cached DEX bundles and tap <strong>Clear AdMob cache</strong> or <strong>Clear all</strong> to force fresh extraction from app assets.
+            Yes! In the reEnhance Manager app, simply switch on <strong>Test Mode</strong>. It automatically uses official Google sample ad units so you can test all your banners, rewarded videos, and interstitials safely without violating any ad policies.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Which ad networks can I use?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            reEnhance supports over 18 networks including Google AdMob, Google Ad Manager, Unity Ads, AppLovin (MAX), IronSource (LevelPlay), Meta Audience Network, StartApp, Mintegral, Pangle, InMobi, Chartboost, Fyber, Vungle, plus top survey and offerwall platforms.
           </div>
         </div>
       </div>
 
       <!-- CTA -->
       <div class="cta-card">
-        <h2 class="cta-title">Ready to Supercharge Your Apps?</h2>
-        <p class="cta-text">Download the reEnhance Manager APK and the companion extension to start serving ads in minutes.</p>
+        <h2 class="cta-title">Ready to Add Ads to Your Apps?</h2>
+        <p class="cta-text">Download the reEnhance Manager app and companion extension to start showing real ads in minutes.</p>
         <div class="hero-actions" style="margin-bottom: 0;">
           <a href="https://github.com/V5ati5h/reEnhance/releases/latest" class="btn-primary">Download Latest Release</a>
-          <a href="https://github.com/V5ati5h/reEnhance" class="btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+          <a href="extension/reEnhance-demo.aia" class="btn-secondary">Download Demo Project (.aia)</a>
         </div>
       </div>
     </div>
@@ -820,7 +870,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p style="margin-bottom: 8px;">reEnhance is open source and distributed under the <a href="https://github.com/V5ati5h/reEnhance/blob/main/LICENSE">Apache License 2.0</a>.</p>
+      <p style="margin-bottom: 8px;">reEnhance is free, open source, and distributed under the <a href="https://github.com/V5ati5h/reEnhance/blob/main/LICENSE">Apache License 2.0</a>.</p>
       <p>Created by <a href="https://github.com/V5ati5h" target="_blank" rel="noopener">Satish Vishwakarma</a> &bull; Not affiliated with Google or MIT.</p>
     </div>
   </footer>
