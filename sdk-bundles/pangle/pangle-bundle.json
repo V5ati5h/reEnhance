@@ -1,0 +1,9 @@
+{
+  "id": "pangle",
+  "version": "6.4.0.6",
+  "dexFiles": ["pangle-1.dex"],
+  "dexSha256": ["92b571a0dda909834359b2f5b444ada8ed01790bb17aa8ccefe3480bf322f633"],
+  "manifestFile": "pangle-manifest.xml",
+  "totalDexBytes": 4386520,
+  "sourceArtifacts": ["ads-sdk-6.4.0.6.aar", "crash_monitor-1.3.8-rc.1.aar", "gecko_pgl-1.0.0.1.aar", "browser-1.6.0-alpha02.aar", "core-1.1.0.aar", "versionedparcelable-1.1.0.aar", "collection-1.1.0.jar", "concurrent-futures-1.0.0.jar", "interpolator-1.0.0.aar", "annotation-1.3.0.jar", "listenablefuture-1.0.jar", "lifecycle-runtime-2.0.0.aar", "lifecycle-common-2.0.0.jar", "core-common-2.0.0.jar"]
+}

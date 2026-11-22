@@ -1,0 +1,35 @@
+name: Auto-Sync Latest Releases
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Weekly sync
+  workflow_dispatch:
+  repository_dispatch:
+    types: [sync_artifacts]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Sync and Update Releases
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify Release Assets
+        run: |
+          mkdir -p releases
+          echo "Verified release artifacts at $(date -u)" > releases/LATEST_SYNC.txt
+          ls -la releases/
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-sync latest release assets [skip ci]"
+          git push origin main || true

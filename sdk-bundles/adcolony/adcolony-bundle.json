@@ -1,0 +1,9 @@
+{
+  "id": "adcolony",
+  "version": "4.8.0",
+  "dexFiles": ["adcolony-1.dex"],
+  "dexSha256": ["18defe7da89bdef01e44c608b36ae36c27d9960de1a573b0c78b5a8973ba3820"],
+  "manifestFile": "adcolony-manifest.xml",
+  "totalDexBytes": 3730580,
+  "sourceArtifacts": ["sdk-4.8.0.aar", "kotlin-stdlib-1.5.31.jar", "play-services-appset-16.0.0.aar", "annotations-13.0.jar", "kotlin-stdlib-common-1.5.31.jar", "play-services-base-17.6.0.aar", "play-services-tasks-17.2.1.aar", "play-services-basement-17.6.0.aar", "fragment-1.0.0.aar", "legacy-support-core-ui-1.0.0.aar", "legacy-support-core-utils-1.0.0.aar", "loader-1.0.0.aar", "viewpager-1.0.0.aar", "coordinatorlayout-1.0.0.aar", "drawerlayout-1.0.0.aar", "slidingpanelayout-1.0.0.aar", "customview-1.0.0.aar", "swiperefreshlayout-1.0.0.aar", "asynclayoutinflater-1.0.0.aar", "core-1.2.0.aar", "versionedparcelable-1.1.0.aar", "collection-1.0.0.jar", "lifecycle-runtime-2.0.0.aar", "lifecycle-viewmodel-2.0.0.aar", "lifecycle-livedata-2.0.0.aar", "lifecycle-livedata-core-2.0.0.aar", "lifecycle-common-2.0.0.jar", "core-runtime-2.0.0.aar", "core-common-2.0.0.jar", "interpolator-1.0.0.aar", "cursoradapter-1.0.0.aar", "documentfile-1.0.0.aar", "localbroadcastmanager-1.0.0.aar", "print-1.0.0.aar", "annotation-1.1.0.jar"]
+}

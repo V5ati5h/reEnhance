@@ -1,0 +1,9 @@
+{
+  "id": "admanager",
+  "version": "23.3.0",
+  "dexFiles": ["admob-1.dex"],
+  "dexSha256": ["3e2d8c46e3f413bbfe220916be291309634360ce5071fe1a0d140f5092db118a"],
+  "manifestFile": "admob-manifest.xml",
+  "totalDexBytes": 2769148,
+  "sourceArtifacts": ["play-services-ads-lite-23.3.0.aar", "work-runtime-2.7.0.aar", "play-services-ads-base-23.3.0.aar", "play-services-measurement-sdk-api-20.1.2.aar", "user-messaging-platform-3.0.0.aar", "play-services-measurement-base-20.1.2.aar", "play-services-basement-18.4.0.aar", "fragment-1.1.0.aar", "viewpager-1.0.0.aar", "loader-1.0.0.aar", "activity-1.0.0.aar", "customview-1.0.0.aar", "core-1.6.0.aar", "annotation-experimental-1.1.0.aar", "listenablefuture-1.0.jar", "lifecycle-livedata-2.1.0.aar", "startup-runtime-1.0.0.aar", "room-runtime-2.2.5.aar", "sqlite-framework-2.1.0.aar", "sqlite-2.1.0.aar", "lifecycle-service-2.1.0.aar", "versionedparcelable-1.1.1.aar", "collection-1.1.0.jar", "lifecycle-livedata-core-2.1.0.aar", "core-runtime-2.1.0.aar", "lifecycle-runtime-2.1.0.aar", "savedstate-1.0.0.aar", "core-common-2.1.0.jar", "tracing-1.0.0.aar", "room-common-2.2.5.jar", "lifecycle-common-2.1.0.jar", "lifecycle-viewmodel-2.1.0.aar", "annotation-1.2.0.jar"]
+}
